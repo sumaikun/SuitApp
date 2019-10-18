@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="suit.InformationPage"             
+             >
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="Información" 
+                   Style="{StaticResource CustomToolBar}"
+                   Margin="0,0,65,0"                                      
+                   ></Label> 
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid >
+            <Image Source="shopVector.jpg" Aspect="Fill" Margin="10,50,10,50"/>
+
+                 <Frame
+                    CornerRadius="27"                    
+                    Padding="0"
+                    VerticalOptions="Center"
+                    BackgroundColor="white"
+                    Margin="30 , 0 ,30, 0"
+                    >
+                     <StackLayout Margin="30 , 10 ,0, 10">
+
+                         <AbsoluteLayout>
+                            <Image Source="searching.png" WidthRequest="20" />
+                            <Label Text="Calle 123 no 45" Margin="18 , 0 ,0, 0" FontSize="18"
+                                   FontFamily="{StaticResource OptimaFont}"
+                             >
+                            </Label>
+                         </AbsoluteLayout>
+                         
+                        <Label Text="Tienda el Pizzi"  FontSize="18" FontFamily="{StaticResource OptimaFont}"
+                         >
+                        </Label>
+                         <AbsoluteLayout>
+                            <Image Source="key.png" WidthRequest="15" />
+                            <Label Text="@nombre usuario" Margin="18 , 0 ,0, 0" FontSize="18"
+                                   FontFamily="{StaticResource OptimaFont}"
+                             >
+                            </Label>
+                        </AbsoluteLayout>
+                        <Label Text="27-12-2019 09:45pm"  FontSize="18" FontFamily="{StaticResource OptimaFont}"
+                         >
+                        </Label>
+                        
+                     </StackLayout>
+                      
+                 </Frame>   
+        
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Button HeightRequest="75"
+                VerticalOptions="Center"
+                BorderRadius="20"
+                BorderColor="white"
+                BorderWidth="2"
+                BackgroundColor="#2F4455"
+                Text="Consultar Tareas"
+                TextColor="White"
+                FontSize="20"
+                Margin="60 , 0 ,60, 10"
+              />    
+            </StackLayout>
+
+             
+        </Grid >
+
+    </ContentPage.Content>
+</ContentPage>

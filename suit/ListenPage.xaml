@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="suit.ListenPage"
+              BackgroundColor="#eaedee"
+             Title="">
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="Sincronizar" 
+                   Style="{StaticResource CustomToolBar}"
+                   Margin="0,0,65,0"                                      
+                   ></Label>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <RelativeLayout>
+
+            <ff:CachedImage HeightRequest="300" HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center" Aspect="AspectFill"
+                                    x:Name="imageWave"
+                                    Source="circle.gif"
+                                    RelativeLayout.WidthConstraint=
+                          "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint=
+                          "{ConstraintExpression Type=RelativeToParent, Property=Height}"
+                                    Margin="0"/>
+
+            <Grid RelativeLayout.WidthConstraint=
+                      "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                    RelativeLayout.HeightConstraint=
+                      "{ConstraintExpression Type=RelativeToParent, Property=Height}"
+                    >
+                <StackLayout VerticalOptions="Center">
+                <!-- Place new controls here -->                    
+                    <Image Source="searching.png" HorizontalOptions="Center" VerticalOptions="Center"  WidthRequest="100"
+                                    />                 
+                </StackLayout>
+
+                <StackLayout VerticalOptions="Center">
+                    <Label Text="Acercate al terminal NFC" FontSize="18" Margin="0,250,0,0" HorizontalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

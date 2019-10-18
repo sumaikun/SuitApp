@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:suit;assembly=suit"
+             x:Class="suit.LoginPage"
+             >
+    
+    <ContentPage.Resources>
+        <StyleSheet Source="/styles/login.css" />
+        <ResourceDictionary>
+
+          <OnPlatform x:Key="IconsMargins"
+                  x:TypeArguments="Thickness"
+                  iOS="10,8,0,0"
+                  Android="10,8,0,0"
+                  WinPhone="0"
+           ></OnPlatform>
+
+          <OnPlatform x:Key="InputIconsMargins"
+                  x:TypeArguments="Thickness"
+                  iOS="40,0,0,0"
+                  Android="40,0,0,0"
+                  WinPhone="0"
+           ></OnPlatform>
+
+
+
+        </ResourceDictionary>
+    </ContentPage.Resources> 
+    
+
+    <ContentPage.Content >
+       
+        <RelativeLayout  >
+
+           
+            <Image Source="login.png" 
+                        RelativeLayout.WidthConstraint=
+                          "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint=
+                          "{ConstraintExpression Type=RelativeToParent, Property=Height}"
+                        Aspect="AspectFill"
+                        Margin="0 , 112 ,0, 0"
+                    />
+
+
+            <!-- BackgroundColor="rgba(55,106,175,0.8)"-->
+            <Grid RelativeLayout.WidthConstraint=
+                      "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                    RelativeLayout.HeightConstraint=
+                      "{ConstraintExpression Type=RelativeToParent, Property=Height}"
+                    StyleId="loginBody"
+                   
+                  >
+
+                <StackLayout>
+                    <Image Source="apes.png" HorizontalOptions="Start" Margin="0 , 15 ,0, 0" WidthRequest="90"
+                            />
+
+                    <Label Text="SUIT" TextColor="#DEDDDD" FontSize="50" FontFamily="{StaticResource OptimaFont}"
+                        HorizontalOptions="Center"  >
+                    </Label>
+
+                </StackLayout>
+
+                <!--BackgroundColor="rgba(255,255,255,0.3)"-->
+                <Frame
+                    CornerRadius="27"                    
+                    Padding="0"
+                    VerticalOptions="Center"                    
+                    StyleClass="inputForms"
+                    Margin="25 , 0 ,25, 25">
+
+                    <AbsoluteLayout>
+                        <Image Source="mailicon.png" WidthRequest="30" Margin="{StaticResource  IconsMargins}" />     
+                        <local:MyEntry
+                        IsSpellCheckEnabled="false"
+                        IsTextPredictionEnabled="false"
+                        Placeholder="Usuario"
+                        TextColor="white"
+                        PlaceholderColor="#F8F4F4"
+                        WidthRequest="220"
+                        Margin='{StaticResource  InputIconsMargins}'
+                        />   
+                    </AbsoluteLayout>
+                </Frame>
+
+                
+                <Frame
+                    CornerRadius="27"                    
+                    Padding="0"
+                    VerticalOptions="Center"
+                    StyleClass="inputForms"
+                    Margin="25 , 100 ,25, 0">
+
+                    <AbsoluteLayout>
+                        <Image Source="usercircleicon.png" WidthRequest="30" Margin="{StaticResource  IconsMargins}" />      
+                        <local:MyEntry
+                        IsSpellCheckEnabled="false"
+                        IsTextPredictionEnabled="false"
+                        Placeholder="Contraseña"
+                        TextColor="white"
+                        PlaceholderColor="#F8F4F4"
+                        IsPassword="true"
+                        Margin='{StaticResource  InputIconsMargins}'
+                        />   
+                    </AbsoluteLayout>
+                </Frame>
+
+
+                <Button HeightRequest="45"
+                        VerticalOptions="Center"
+                        BorderRadius="20"
+                        BorderColor="white"
+                        BorderWidth="2"
+                        BackgroundColor="#2F4455"
+                        Text="INGRESAR"
+                        TextColor="White"
+                        FontSize="20"
+                        Margin="60 , 260 ,60, 0"
+                        Clicked="SubmitLogin"/>    
+
+            </Grid>
+
+            
+                
+
+        </RelativeLayout>
+
+    </ContentPage.Content>    
+</ContentPage>
