@@ -17,7 +17,7 @@ namespace suit
         void SubmitLogin(object sender, EventArgs args)
         {
             App.Current.MainPage = new MainPage {
-                Detail = new NavigationPage(new InformationPage())
+                Detail = new NavigationPage(new ListenPage())
             };          
 
         }

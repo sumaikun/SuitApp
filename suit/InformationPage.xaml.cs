@@ -11,5 +11,16 @@ namespace suit
         {
             InitializeComponent();
         }
+
+        async void GoToTasks(object sender, EventArgs args)
+        {
+            /*App.Current.MainPage = new MainPage
+            {
+                Detail = new NavigationPage(new TasksPage())
+            };*/
+
+            await Navigation.PushAsync(new TasksPage());
+
+        }
     }
 }

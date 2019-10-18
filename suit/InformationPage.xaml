@@ -61,6 +61,7 @@
                 TextColor="White"
                 FontSize="20"
                 Margin="60 , 0 ,60, 10"
+                Clicked="GoToTasks"
               />    
             </StackLayout>
 
