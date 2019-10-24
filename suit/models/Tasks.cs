@@ -1,11 +1,12 @@
 ﻿using System;
-namespace suit.models
+using System.Collections.Generic;
+using System.Text;
+
+namespace suit
 {
     public class Tasks
     {
-        public int Count { get; set; }
-        public string Title { get; set; }
-        public string Icon { get; set; }
+        public string TaskStatus { get; set; }
+        public string TaskName { get; set; }
     }
-    
 }

@@ -26,23 +26,23 @@
 
                          <AbsoluteLayout>
                             <Image Source="searching.png" WidthRequest="20" />
-                            <Label Text="Calle 123 no 45" Margin="18 , 0 ,0, 0" FontSize="18"
+                            <Label x:Name="labelAddress" Margin="18 , 0 ,0, 0" FontSize="18"
                                    FontFamily="{StaticResource OptimaFont}"
                              >
                             </Label>
                          </AbsoluteLayout>
                          
-                        <Label Text="Tienda el Pizzi"  FontSize="18" FontFamily="{StaticResource OptimaFont}"
+                        <Label x:Name="labelLocationName" FontSize="18" FontFamily="{StaticResource OptimaFont}"
                          >
                         </Label>
                          <AbsoluteLayout>
                             <Image Source="key.png" WidthRequest="15" />
-                            <Label Text="@nombre usuario" Margin="18 , 0 ,0, 0" FontSize="18"
+                            <Label x:Name="labelUserName" Margin="18 , 0 ,0, 0" FontSize="18"
                                    FontFamily="{StaticResource OptimaFont}"
                              >
                             </Label>
                         </AbsoluteLayout>
-                        <Label Text="27-12-2019 09:45pm"  FontSize="18" FontFamily="{StaticResource OptimaFont}"
+                        <Label x:Name="labelDate"  FontSize="18" FontFamily="{StaticResource OptimaFont}"
                          >
                         </Label>
                         

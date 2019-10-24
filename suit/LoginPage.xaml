@@ -16,15 +16,12 @@
                   WinPhone="0"
            ></OnPlatform>
 
-          <OnPlatform x:Key="InputIconsMargins"
+            <OnPlatform x:Key="InputIconsMargins"
                   x:TypeArguments="Thickness"
                   iOS="40,0,0,0"
                   Android="40,0,0,0"
                   WinPhone="0"
            ></OnPlatform>
-
-
-
         </ResourceDictionary>
     </ContentPage.Resources> 
     
@@ -33,16 +30,16 @@
        
         <RelativeLayout  >
 
-           
-            <Image Source="login.png" 
+            <StackLayout Margin="0 , 95 ,0, 0">
+                <Image Source="loginlittle.png" 
                         RelativeLayout.WidthConstraint=
                           "{ConstraintExpression Type=RelativeToParent, Property=Width}"
                         RelativeLayout.HeightConstraint=
                           "{ConstraintExpression Type=RelativeToParent, Property=Height}"
                         Aspect="AspectFill"
-                        Margin="0 , 112 ,0, 0"
+                       
                     />
-
+            </StackLayout>
 
             <!-- BackgroundColor="rgba(55,106,175,0.8)"-->
             <Grid RelativeLayout.WidthConstraint=
@@ -74,6 +71,7 @@
                     <AbsoluteLayout>
                         <Image Source="mailicon.png" WidthRequest="30" Margin="{StaticResource  IconsMargins}" />     
                         <local:MyEntry
+                        x:Name="userEntry"
                         IsSpellCheckEnabled="false"
                         IsTextPredictionEnabled="false"
                         Placeholder="Usuario"
@@ -96,6 +94,7 @@
                     <AbsoluteLayout>
                         <Image Source="usercircleicon.png" WidthRequest="30" Margin="{StaticResource  IconsMargins}" />      
                         <local:MyEntry
+                        x:Name="passwordEntry"
                         IsSpellCheckEnabled="false"
                         IsTextPredictionEnabled="false"
                         Placeholder="Contraseña"
@@ -108,7 +107,8 @@
                 </Frame>
 
 
-                <Button HeightRequest="45"
+                <Button x:Name="enterButton"
+                        HeightRequest="45"
                         VerticalOptions="Center"
                         BorderRadius="20"
                         BorderColor="white"
