@@ -17,7 +17,7 @@ namespace suit
             labelAddress.Text = Convert.ToString(App.Current.Properties["LocationAddress"]);
             labelLocationName.Text = Convert.ToString(App.Current.Properties["LocationPDV"]);
             labelUserName.Text = Convert.ToString(App.Current.Properties["name"]);
-            labelDate.Text = thisDay.ToString("g");
+            labelDate.Text = DateTime.Now.ToString();
         }
 
         async void GoToTasks(object sender, EventArgs args)

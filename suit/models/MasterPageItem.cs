@@ -1,7 +1,7 @@
 ﻿using System;
 namespace suit.models
 {
-    public class MasterPageItem
+    public class MasterPageItem 
     {
         public string Title { get; set; }
 

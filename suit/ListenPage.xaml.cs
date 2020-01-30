@@ -91,6 +91,8 @@ namespace suit
                 readNDEFMEssage(e.NdefMessage);  
             }
             GetLocationParamaters();
+
+            await firebaseHelper.AddRead(DateTime.Now.ToString(), App.Current.Properties["locationID"].ToString(), App.Current.Properties["userid"].ToString());
         }
       
         void GetUserData()

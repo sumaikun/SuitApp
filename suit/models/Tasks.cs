@@ -8,5 +8,7 @@ namespace suit
     {
         public string TaskStatus { get; set; }
         public string TaskName { get; set; }
+        public string hour { get; set;}
+        public string userId { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using suit.models;
 
 using Xamarin.Forms;
@@ -64,17 +65,41 @@ namespace suit
             bool answer = await DisplayAlert("Pregunta", "¿Esta tarea ha sido ya hecha?", "Si", "No");
             if (answer == true)
             {
-                taskToChange = changeTaskStatus(myTaskList, myTask.Title);
+                taskToChange = changeTaskStatusYes(myTaskList, myTask.Title);
+                await firebaseHelper.UpdateTaskStatus(Convert.ToString(App.Current.Properties["locationID"]), taskToChange);
+                this.OnPropertyChanged("Content");
+            }
+            else {
+                taskToChange = changeTaskStatusNot(myTaskList, myTask.Title);
                 await firebaseHelper.UpdateTaskStatus(Convert.ToString(App.Current.Properties["locationID"]), taskToChange);
             }
         }
-        private List<Tasks> changeTaskStatus(List<Tasks> locationTasks, String taskName)
+        private List<Tasks> changeTaskStatusYes(List<Tasks> locationTasks, String taskName)
         {
             List<Tasks> myNewTasks = locationTasks;
             for (int count = 0; count < myNewTasks.Count; count++)
             {
                 if (myNewTasks[count].TaskName == taskName)
+                {
                     myNewTasks[count].TaskStatus = "done";
+                    myNewTasks[count].userId = App.Current.Properties["userid"].ToString();
+                    myNewTasks[count].hour = DateTime.Now.ToString();
+                }
+            }
+            return myNewTasks;
+        }
+
+        private List<Tasks> changeTaskStatusNot(List<Tasks> locationTasks, String taskName)
+        {
+            List<Tasks> myNewTasks = locationTasks;
+            for (int count = 0; count < myNewTasks.Count; count++)
+            {
+                if (myNewTasks[count].TaskName == taskName)
+                {
+                    myNewTasks[count].TaskStatus = "pending";
+                    myNewTasks[count].userId = null;
+                    myNewTasks[count].hour = null;
+                }
             }
             return myNewTasks;
         }

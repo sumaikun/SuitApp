@@ -31,6 +31,14 @@ namespace suit
               .Child("Users")
               .PostAsync(new User() { UserId = userId, Name = name });
         }
+
+        public async Task AddRead(string hour, string locationId, string userId)
+        {
+
+            await firebase
+              .Child("Reads")
+              .PostAsync(new Reads() { hour = hour, locationId = locationId, userId= userId });
+        }
         public async Task<User> GetUser(int userId)
         {
             var allUsers = await GetAllUsers();
