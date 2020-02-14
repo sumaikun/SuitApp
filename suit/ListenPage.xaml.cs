@@ -11,30 +11,42 @@ namespace suit
     public partial class ListenPage : ContentPage
     {
         FirebaseHelper firebaseHelper = new FirebaseHelper();
-        private readonly INfcForms device;
-        Boolean IsConnected;
+        private INfcForms device;
+        Boolean IsConnected  = false;
         Boolean IsNDEFSupported;
         Boolean IsWriteable;
         public ListenPage()
         {
-            InitializeComponent();
-             device = DependencyService.Get<INfcForms>();
-             device.NewTag += HandleNewTag;
-             device.TagConnected += device_TagConnected;
-             device.TagDisconnected += device_TagDisconnected;
+            //device.TagConnected += device_TagConnected;
+            //device.TagDisconnected += device_TagDisconnected;
             //var browser = new WebView();
             //browser.Source = "http://xamarin.com";
             //Content = browser;
+            Console.WriteLine("listen page construct");
+            IsConnected = false;
+            InitializeComponent();
+            device = DependencyService.Get<INfcForms>();
+            device.NewTag += HandleNewTag;
+            Console.WriteLine("mounted");
         }
-        void device_TagDisconnected(object sender, NfcFormsTag e)
+
+        protected override void OnAppearing()
+        {           
+            
+        }
+
+
+        /*void device_TagDisconnected(object sender, NfcFormsTag e)
         {
+            Console.WriteLine("tag disconnected");
             IsConnected = false;
         }
 
         void device_TagConnected(object sender, NfcFormsTag e)
         {
+            Console.WriteLine("tag connected");
             IsConnected = true;
-        }
+        }*/
 
         private ObservableCollection<string> readNDEFMEssage(NdefMessage message)
         {
@@ -79,20 +91,35 @@ namespace suit
 
         async void HandleNewTag(object sender, NfcFormsTag e)
         {
-            System.Diagnostics.Trace.WriteLine("Tag detected");
-            ObservableCollection<string> collection = new ObservableCollection<string>();
-           
+            Console.WriteLine("connected status" + IsConnected);
 
-            IsWriteable = e.IsWriteable;
-            IsNDEFSupported = e.IsNdefSupported;
-
-            if (e.IsNdefSupported)
+            if (!IsConnected)
             {
-                readNDEFMEssage(e.NdefMessage);  
-            }
-            GetLocationParamaters();
 
-            await firebaseHelper.AddRead(DateTime.Now.ToString(), App.Current.Properties["locationID"].ToString(), App.Current.Properties["userid"].ToString());
+                IsConnected = true;
+
+                System.Diagnostics.Trace.WriteLine("Tag detected");
+
+                ObservableCollection<string> collection = new ObservableCollection<string>();
+
+                IsWriteable = e.IsWriteable;
+                IsNDEFSupported = e.IsNdefSupported;
+
+                if (e.IsNdefSupported)
+                {
+                    readNDEFMEssage(e.NdefMessage);
+                }
+
+                Console.WriteLine("time "+ DateTime.Now.ToString("dd/MM/yy HH:mm:ss"));
+
+                await firebaseHelper.AddRead(DateTime.Now.ToString("dd/MM/yy HH:mm:ss"), App.Current.Properties["locationID"].ToString(), App.Current.Properties["userid"].ToString());
+
+                GetLocationParamaters();
+
+                device = default(INfcForms);
+
+            }
+            
         }
       
         void GetUserData()
@@ -109,8 +136,10 @@ namespace suit
             App.Current.Properties["LocationAddress"] = location.Address;
             App.Current.Properties["LocationNeighborhood"] = location.Neighborhood;
             App.Current.Properties["LocationPDV"] = location.PDV;
-            App.Current.Properties["LocationType"] = location.Type;
+            App.Current.Properties["LocationType"] = location.Type;            
             await Navigation.PushAsync(new InformationPage());
+            Navigation.RemovePage(this);
+
         }
     }
 }

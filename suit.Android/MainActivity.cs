@@ -62,7 +62,10 @@ namespace suit.Droid
         protected override void OnPause()
         {
             base.OnPause();
-            NFCdevice.DisableForegroundDispatch(this);
+            if (NFCdevice != null)
+            {
+                NFCdevice.DisableForegroundDispatch(this);
+            }
         }
 
         protected override void OnNewIntent(Intent intent)

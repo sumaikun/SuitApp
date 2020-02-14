@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using suit.models;
 
@@ -15,14 +16,20 @@ namespace suit
         { 
             InitializeComponent();
             getMyTasks();
-            listView.ItemSelected += OnAlertYesNoClicked;
+            listView.ItemTapped += OnAlertYesNoClicked;
         }
          private async void getMyTasks() {
             var location = await firebaseHelper.GetLocation(Convert.ToString(App.Current.Properties["locationID"]));
             Location newLocation = location;
             Tasks myTask = new Tasks();
-            var task = new List<Task>();
-            List<Task> myTasks = new List<Task>();
+
+            //var task = new List<Task>();
+
+            ObservableCollection<Task> task = new ObservableCollection<Task>();
+
+            //List<Task> myTasks = new List<Task>();
+
+
             int LabelCount = 0;
             if (location != null)
             {
@@ -56,23 +63,48 @@ namespace suit
                 await DisplayAlert("EXITO", "No hay tareas asignadas a la ubicación", "OK");
             }
         }
-        async void OnAlertYesNoClicked(object sender, EventArgs e)
+
+        async void OnAlertYesNoClicked(object sender, ItemTappedEventArgs args)
         {
+            if (loading.IsRunning)
+            {
+                return;       
+            }
+
+            loading.IsRunning = true;
+
+            var selectedItem = args.Item as Task;            
+
             var location = await firebaseHelper.GetLocation(Convert.ToString(App.Current.Properties["locationID"]));
             List<Tasks> myTaskList = location.Tasks;
             List<Tasks> taskToChange;
             var myTask = listView.SelectedItem as Task;
-            bool answer = await DisplayAlert("Pregunta", "¿Esta tarea ha sido ya hecha?", "Si", "No");
-            if (answer == true)
+
+            var answer = await DisplayActionSheet("¿ Ya realizó esta tarea ?", "Cancelar", null, "Si", "No");
+
+            Console.WriteLine("answer for alert "+answer);
+
+            if (answer == "Si")
             {
                 taskToChange = changeTaskStatusYes(myTaskList, myTask.Title);
                 await firebaseHelper.UpdateTaskStatus(Convert.ToString(App.Current.Properties["locationID"]), taskToChange);
                 this.OnPropertyChanged("Content");
+                selectedItem.Icon = "check";
+                selectedItem.OnPropertyChanged();
+                loading.IsRunning = false;
             }
-            else {
+            if (answer == "No")
+            {
                 taskToChange = changeTaskStatusNot(myTaskList, myTask.Title);
                 await firebaseHelper.UpdateTaskStatus(Convert.ToString(App.Current.Properties["locationID"]), taskToChange);
+                this.OnPropertyChanged("Content");
+                selectedItem.Icon = "Uncheck";
+                selectedItem.OnPropertyChanged();
+                loading.IsRunning = false;
             }
+
+            loading.IsRunning = false;
+
         }
         private List<Tasks> changeTaskStatusYes(List<Tasks> locationTasks, String taskName)
         {

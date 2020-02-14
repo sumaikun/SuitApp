@@ -30,6 +30,7 @@
        
         <RelativeLayout  >
 
+
             <StackLayout Margin="0 , 95 ,0, 0">
                 <Image Source="loginlittle.png" 
                         RelativeLayout.WidthConstraint=
@@ -98,6 +99,7 @@
                         IsSpellCheckEnabled="false"
                         IsTextPredictionEnabled="false"
                         Placeholder="Contraseña"
+                        WidthRequest="220"
                         TextColor="white"
                         PlaceholderColor="#F8F4F4"
                         IsPassword="true"
@@ -122,6 +124,12 @@
 
             </Grid>
 
+
+            <ActivityIndicator RelativeLayout.WidthConstraint=
+                          "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint=
+                          "{ConstraintExpression Type=RelativeToParent, Property=Height}"
+             Color="white" HorizontalOptions="Center" IsRunning="false" x:Name="loading"   />
             
                 
 

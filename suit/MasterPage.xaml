@@ -11,9 +11,17 @@
            <ListView.ItemsSource>
               
                <x:Array Type="{x:Type local1:MasterPageItem}">
+
+                    <local1:MasterPageItem Title="Leer Tags" IconSource="clipboard.png"
+                                           TargetType="{x:Type local:ListenPage}" />
+
                     <local1:MasterPageItem Title="Cerrar Sesión" IconSource="key.png"
-                                           TargetType="{x:Type local:LoginPage}" />                    
+                                           TargetType="{x:Type local:LoginPage}" />
+
+                   
                 </x:Array>
+
+
              
             </ListView.ItemsSource>
             <ListView.ItemTemplate>

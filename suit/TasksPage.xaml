@@ -12,7 +12,8 @@
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        <StackLayout>
+
+        <StackLayout>            
 
             <ListView x:Name="listView" HasUnevenRows="True" SeparatorVisibility="None"          
             >
@@ -46,6 +47,11 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <ActivityIndicator RelativeLayout.WidthConstraint=
+                          "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint=
+                          "{ConstraintExpression Type=RelativeToParent, Property=Height}"
+             Color="white" HorizontalOptions="Center" IsRunning="false" x:Name="loading"   />
         </StackLayout>
         
     </ContentPage.Content>

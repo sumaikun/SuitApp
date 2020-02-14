@@ -17,6 +17,14 @@ namespace suit
 
         async void SubmitLogin(object sender, EventArgs args)
         {
+
+            if (loading.IsRunning)
+            {
+                return;
+            }
+
+            loading.IsRunning = true;
+
             String Password;
             String Username;
             if (string.IsNullOrEmpty(userEntry.Text))
@@ -43,12 +51,13 @@ namespace suit
                 System.Diagnostics.Trace.WriteLine(user.Password);
                 if (user != null && user.Password == Password)
                 {
+                    
                     App.Current.Properties["name"] = user.Name;
                     App.Current.Properties["email"] = user.Email;
                     App.Current.Properties["username"] = user.Username;
                     App.Current.Properties["userid"] = user.UserId;
                     App.Current.Properties["IsLoggedIn"] = true;
-
+                    loading.IsRunning = false;
                     App.Current.MainPage = new MainPage
                     {
                         Detail = new NavigationPage(new ListenPage())
@@ -58,6 +67,7 @@ namespace suit
                 else
                 {
                     await DisplayAlert("Alerta", "Usuario o contraseña incorrectas", "OK");
+                    loading.IsRunning = false;
                     passwordEntry.Text = string.Empty;
                     passwordEntry.Focus();
                     enterButton.IsEnabled = true;
